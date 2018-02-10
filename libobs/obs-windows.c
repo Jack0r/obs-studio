@@ -74,6 +74,13 @@ char *find_libobs_data_file(const char *file)
 	return NULL;
 }
 
+static void log_current_date(void)
+{
+	char* ctime( const time_t* time );
+	time_t result = time(NULL);
+	blog(LOG_INFO, "Date: %s", ctime(&result));
+}
+
 static void log_processor_info(void)
 {
 	HKEY    key;
@@ -380,6 +387,7 @@ void log_system_info(void)
 
 	win_ver = (ver.major << 8) | ver.minor;
 
+	log_current_date();
 	log_processor_info();
 	log_processor_cores();
 	log_available_memory();
